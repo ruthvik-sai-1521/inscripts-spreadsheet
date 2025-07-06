@@ -26,5 +26,5 @@ npm run dev
 
 ## 🚀 Live Demo
 
-🔗 [Click here to view live](https://inscripts-spreadsheet.vercel.app)
+🔗 [Click here to view live](https://inscripts-spreadsheet-git-main-ruthvik-thalapanenis-projects.vercel.app/)
 
