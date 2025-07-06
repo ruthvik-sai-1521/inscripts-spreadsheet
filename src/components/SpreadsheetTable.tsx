@@ -47,23 +47,22 @@ const defaultData: Person[] = [
 ];
 
 const SpreadsheetTable = () => {
-  const [visibleColumns, setVisibleColumns] = useState<Column<Person>[]>(ALL_COLUMNS);
-  const [selectedCell, setSelectedCell] = useState<{ row: number; col: number }>({ row: 0, col: 0 });
+  const [visibleColumns, setVisibleColumns] =
+    useState<Column<Person>[]>(ALL_COLUMNS);
+  const [selectedCell, setSelectedCell] = useState<{
+    row: number;
+    col: number;
+  }>({ row: 0, col: 0 });
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable(
-    {
-      columns: visibleColumns,
-      data: defaultData,
-    },
-    useBlockLayout,
-    useResizeColumns
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns: visibleColumns,
+        data: defaultData,
+      },
+      useBlockLayout,
+      useResizeColumns
+    );
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -72,9 +71,11 @@ const SpreadsheetTable = () => {
         setSelectedCell((prev) => {
           let next = { ...prev };
           if (e.key === "ArrowUp") next.row = Math.max(prev.row - 1, 0);
-          if (e.key === "ArrowDown") next.row = Math.min(prev.row + 1, rows.length - 1);
+          if (e.key === "ArrowDown")
+            next.row = Math.min(prev.row + 1, rows.length - 1);
           if (e.key === "ArrowLeft") next.col = Math.max(prev.col - 1, 0);
-          if (e.key === "ArrowRight") next.col = Math.min(prev.col + 1, visibleColumns.length - 1);
+          if (e.key === "ArrowRight")
+            next.col = Math.min(prev.col + 1, visibleColumns.length - 1);
           return next;
         });
       }
@@ -128,9 +129,11 @@ const SpreadsheetTable = () => {
                   {column.render("Header")}
                   {"getResizerProps" in column && (
                     <div
-                      {...(column as ColumnInstance<Person> & {
-                        getResizerProps: () => React.HTMLAttributes<HTMLDivElement>;
-                      }).getResizerProps()}
+                      {...(
+                        column as ColumnInstance<Person> & {
+                          getResizerProps: () => React.HTMLAttributes<HTMLDivElement>;
+                        }
+                      ).getResizerProps()}
                       className="resizer absolute right-0 top-0 h-full w-1 bg-blue-400 opacity-0 group-hover:opacity-100 cursor-col-resize"
                     />
                   )}
@@ -144,14 +147,22 @@ const SpreadsheetTable = () => {
           {rows.map((row, rowIndex) => {
             prepareRow(row);
             return (
-              <div {...row.getRowProps()} className="table-row hover:bg-gray-50" key={row.id}>
+              <div
+                {...row.getRowProps()}
+                className="table-row hover:bg-gray-50"
+                key={row.id}
+              >
                 {row.cells.map((cell, colIndex) => {
-                  const isSelected = rowIndex === selectedCell.row && colIndex === selectedCell.col;
+                  const isSelected =
+                    rowIndex === selectedCell.row &&
+                    colIndex === selectedCell.col;
                   return (
                     <div
                       {...cell.getCellProps()}
                       className={`table-cell px-4 py-2 border-r border-t ${
-                        isSelected ? "bg-blue-100 outline outline-1 outline-blue-500" : ""
+                        isSelected
+                          ? "bg-blue-100 outline outline-1 outline-blue-500"
+                          : ""
                       }`}
                       key={cell.column.id}
                     >
