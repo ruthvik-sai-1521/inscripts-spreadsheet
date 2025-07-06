@@ -23,3 +23,8 @@ git clone https://github.com/your-username/inscripts-spreadsheet.git
 cd inscripts-spreadsheet
 npm install
 npm run dev
+
+## 🚀 Live Demo
+
+🔗 [Click here to view live](https://inscripts-spreadsheet.vercel.app)
+
